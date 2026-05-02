@@ -1,21 +1,41 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import { useDispatch, useSelector } from '../../services/store';
+import {
+  selectFeedOrders,
+  selectIngredients,
+  selectProfileOrders,
+  selectSelectedOrder
+} from '../../services/selectors';
+import { getOrderByNumber } from '../../services/slices/order-slice';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const dispatch = useDispatch();
+  const { number } = useParams();
+  const orderNumber = Number(number);
+  const feedOrders = useSelector(selectFeedOrders);
+  const profileOrders = useSelector(selectProfileOrders);
+  const selectedOrder = useSelector(selectSelectedOrder);
+  const ingredients: TIngredient[] = useSelector(selectIngredients);
+  const requestedOrderNumber = useRef<number | null>(null);
+  const orderData =
+    feedOrders.find((order) => order.number === orderNumber) ||
+    profileOrders.find((order) => order.number === orderNumber) ||
+    selectedOrder;
 
-  const ingredients: TIngredient[] = [];
+  useEffect(() => {
+    if (
+      Number.isFinite(orderNumber) &&
+      !orderData &&
+      requestedOrderNumber.current !== orderNumber
+    ) {
+      requestedOrderNumber.current = orderNumber;
+      dispatch(getOrderByNumber(orderNumber));
+    }
+  }, [dispatch, orderData, orderNumber]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
