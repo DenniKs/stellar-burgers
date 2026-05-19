@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "mock-bun",
+      "name": "Mock Bun",
+      "type": "bun",
+      "proteins": 10,
+      "fat": 20,
+      "carbohydrates": 30,
+      "calories": 40,
+      "price": 100,
+      "image": "data:image/png;base64,iVBORw0KGgo=",
+      "image_mobile": "data:image/png;base64,iVBORw0KGgo=",
+      "image_large": "data:image/png;base64,iVBORw0KGgo="
+    },
+    {
+      "_id": "mock-main",
+      "name": "Mock Main",
+      "type": "main",
+      "proteins": 11,
+      "fat": 21,
+      "carbohydrates": 31,
+      "calories": 41,
+      "price": 200,
+      "image": "data:image/png;base64,iVBORw0KGgo=",
+      "image_mobile": "data:image/png;base64,iVBORw0KGgo=",
+      "image_large": "data:image/png;base64,iVBORw0KGgo="
+    },
+    {
+      "_id": "mock-sauce",
+      "name": "Mock Sauce",
+      "type": "sauce",
+      "proteins": 12,
+      "fat": 22,
+      "carbohydrates": 32,
+      "calories": 42,
+      "price": 50,
+      "image": "data:image/png;base64,iVBORw0KGgo=",
+      "image_mobile": "data:image/png;base64,iVBORw0KGgo=",
+      "image_large": "data:image/png;base64,iVBORw0KGgo="
+    }
+  ]
+}
